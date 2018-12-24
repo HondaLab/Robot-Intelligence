@@ -20,4 +20,4 @@ PCや複数のラズパイを用いてロボット知能を構成する場合、
 その場合にも、データ通信が欠かせません。
 
 Pythonのソケット通信を用いてデータ通信する例を説明します。
-[Python](https://github.com/HondaLab/textbook/wiki/Python%E3%81%A7socket%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8B
+[Python](https://github.com/HondaLab/textbook/wiki/Python%E3%81%A7socket%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8B)
