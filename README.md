@@ -14,5 +14,5 @@
 
 ここはしばらくは工事中で、体系だてて、すべてがそろっているわけではありませんので、悪しからず。
 
-[wiki](https://github.com/HondaLab/textbook/wiki)
+[wikiへ](https://github.com/HondaLab/textbook/wiki)
 
