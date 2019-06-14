@@ -15,8 +15,8 @@
 
 ここはしばらくは工事中で、体系だてて、すべてがそろっているわけではありませんので、悪しからず。
 
-詳細はwikiに記述します．
+詳細は[ロボット知能wiki](https://github.com/HondaLab/textbook/wiki)
+に記述します．
 
-[wikiへ](https://github.com/HondaLab/textbook/wiki)
 
 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.ja)
