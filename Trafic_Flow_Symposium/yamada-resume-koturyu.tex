@@ -1,0 +1,237 @@
+%------------------------------------------------------------------------
+%  交通流のシミュレーション 
+%  The Mathematical Society of Traffic Flow
+%  
+%  Ver. 1.0 05/12/09  H. Watanabe
+%------------------------------------------------------------------------
+
+\documentclass[twocolumn]{jarticle} %二段組の場合
+%\documentclass[onecolumn]{jarticle}  %一段組の場合
+
+\usepackage{mstf2}
+\usepackage[dvipdfmx]{graphicx}
+%------------------------------------------------------------------------
+
+\title{%和文タイトル
+2次元最適速度ロボットの多様な集団ひも状走行
+}
+
+\titleE{%英文タイトル
+Various traveling state in collective string-like motion of 2D optimal velocity robots
+}
+
+\author{%和文氏名
+山田 将司$^1$，大園 章宏$^2$，本田 泰$^3$
+}
+
+\authorE{%英文氏名
+Masashi Yamada$^1$，Akihiro Ohsono$^2$，Yasushi Honda $^3$
+}
+
+\affiliation{%和文所属
+$^1$ 室蘭工業大学 工学部 情報電子工学系学科\\
+$^2$ 室蘭工業大学 工学研究科 情報電子工学系専攻\\
+$^3$ 室蘭工業大学大学院 しくみ解明系領域
+}
+\affiliationE{%英文所属
+$^1$ Department Information and Electronic Engineering，School of Engineering，Muroran Institute of Technology，Japan\\
+$^2$ Division of Information and Electronic Engineering，Graduate School of Engineering，Muroran Institute of Technology，Japan\\
+$^3$ College of Information and Systems, Muroran Institute of Technology，Japan
+}
+
+\abst{%和文概要
+我々は先行研究において，2次元最適速度モデルという自己駆動モデルを知能として組み込んだ 2次元最適速度ロボットを開発し，それらのロボットが円形フィールド上で集団ひも状走行を形成することを明らかにした．
+安定したひも状走行の形成条件として，主に感応度($a$)と最適速度関数の変化率($\beta$)が形成条件に大きく影響していることも明らかにした．
+本研究では，2次元最適速度ロボットが集団ひも状走行を行うための条件である，感応度($a$)と最適速度関数の変化率($\beta$)を変化させ，2次元最適速度ロボットの行動の変化をより詳しく調査した．
+本研究の目的は，ひも状走行を形成するパラメータ領域の発見を目指すことである．
+初期位置やフィールドの形といった環境がひも状走行に影響があるのかを調べた．
+結果として安定したひも状走行を形成するパラメータ領域を発見したが特異な領域があることも発見した．
+}
+
+\abstE{%英文概要
+In our previous study, we developed two-dimensional optimal velocity robots that incorporated a self-driven model called a two-dimensional optimal velocity model as an intelligence, and revealed that these robots formed collective string-like motion in a circular field.
+It was also clarified that the sensitivity ($a$) and the rate of change of the optimal velocity function ($\beta$) mainly influenced formation conditions of stable string-like motion.
+In this study, the 2D optimal velocity robot move in various sensitivity ($a$) and the rate of change of the optimal velocity function ($ \beta$), which are the conditions for the collective string motion．We investigated robot behavior in more detail than previous study.
+We investigated whether the environment such as the initial position and the shape of the field had an effect on the string-like motion.
+As a result, we found a parameter region that forms stable string-like motion, but also found that there are several kind of string-like motion.
+}
+%------------------------------------------------------------------------
+% ここから本文
+%------------------------------------------------------------------------
+\begin{document}
+\maketitle
+\section{はじめに}
+歩行者や交通渋滞といった集団運動は，各個体の相互作用によって自己組織的に形成される動きである．
+集団運動の例として，自動車の運動を単純な運動方程式で表した 一次元最適速度モデルがある．
+同モデルのシュミレーション実験及び結果から，信号やトンネルといった，各個体の動きを制限する要素がなくても交通渋滞が引き起こされることが示された\cite{zyutai_1}．
+交通流は日常で見ることができる馴染み深い現象である．
+我々はその中で交通流モデルである 一次元最適速度モデルを二次元に拡張した二次元最適速度ロボットを開発した．
+本研究の目的は最適速度モデルを組み込んだ二次元最適速度ロボットを用いて，各パラメータに対する集団ひも状走行への影響を調べることである．
+\section{2次元最適速度ロボット}
+\vspace{1mm}
+\subsection{2次元最適速度モデル}
+\vspace{1mm}
+2次元最適速度モデルは以下の運動方程式(\ref{model_1})式で表される\cite{2014}\cite{2016}．
+\begin{eqnarray}
+{\bf \ddot{x}}_{j} = a\left[ \sum_{k} {\bf V} \left({\bf r}_{kj},{\bf \dot{x}}_{j}\right) - {\bf \dot{x}}_{j} \right]
+\label{model_1}
+\end{eqnarray}
+$ {\bf V}({\bf r}_{kj},{\bf \dot{x}}_{j}) $は$j$番目のロボットが$k$番目のロボットから受ける相互作用項である．
+$\mbox{\boldmath $n$}_{kj}$は${\bf r}_{kj}$の単位ベクトルを表す．
+$\theta_{kj}$は$j$番目のロボットの速度ベクトル${\bf \dot{x}}_j$と相対位置${\bf r}_{kj}$のなす角であり(\ref{model_2})式で与えられる．
+\begin{eqnarray}
+{\bf V}({\bf {r}}_{kj} , {\bf \dot{x}}_j) = (1+\cos\theta_{kj}) f\left(r_{kj}\right)  \mbox{\boldmath $n$}_{kj}
+\label{model_2}
+\end{eqnarray}
+$f(r_{kj})$は最適速度関数であり，ロボットとの距離$r_{kj}$に応じて引力または斥力を決定する関数である．
+\begin{eqnarray}
+f(r_{kj}) = \alpha  \left[ \tanh\beta(r_{kj} - b ) + c \right]
+\label{model_3}
+\end{eqnarray}
+\vspace{-2mm}
+\subsection{2次元最適速度ロボット}
+\vspace{1mm}
+2輪の走行ロボットに本モデルを組み込んだアルゴリズムについて説明する．
+$\Delta t$秒後の${\bf \dot{x}}_j$を離散化して求めると(\ref{model_4})式となる．
+(\ref{model_2})式中の$\theta_{kj}$は 360°反応できる範囲があるが，ロボットに搭載されているカメラの画角は約 70°である．
+よって，$ -35°< \theta_{kj} < 35°$でなければ，カメラで他機体を認識できない．
+\begin{eqnarray}
+{\bf \dot{x}}_j(t+\Delta t) = {\bf \dot{x}}_j(t) + \Delta t {\bf \ddot{x}}_j (t)
+\label{model_4}
+\end{eqnarray}
+また，2輪の接地面での速度$v_L$，$v_R$を(\ref{left})(\ref{right})式で求める．
+ここでの$v_L$は進行方向左側の車輪の速度，同様に$v_R$は右の車輪の速度を表す．
+\begin{eqnarray}
+\label{left}
+v_L(t) &=& \dot{x}_j(t) + d \frac{\Delta\theta}{\Delta t}\\
+\label{right}
+v_R(t) &=& \dot{x}_j(t) - d \frac{\Delta\theta}{\Delta t}
+\end{eqnarray}
+$\Delta\theta$は${\bf \dot{x}}_j \left(t\right)$と${\bf \dot{x}}_j (t+\Delta t)$のなす角である．
+z成分を0とした三次元ベクトル${\bf \dot{x}}_j(t)$と${\bf \dot{x}}_j (t+\Delta t)$の外積ベクトルのz成分を${\bf \dot{x}}_j (t)\times{\bf \dot{x}}_j (t + \Delta t) $と定義する． 
+$d$は車輪とロボットの中心からの距離である．
+\begin{eqnarray}
+\Delta\theta =
+\mbox{sgn}({\bf \dot{x}}_j (t) \times {\bf \dot{x}}_j (t+\Delta t)) \cdot \nonumber \\
+\quad \cos^{-1} \frac{{\bf \dot{x}}_j (t) \cdot {\bf \dot{x}}_j (t+\Delta t)}{{\dot{x}}_j (t){\dot{x}}_j (t+\Delta t)} 
+\end{eqnarray}
+\begin{figure}[t]
+  \includegraphics[width=1.0\linewidth]{moshiki1.jpg}
+  \caption{$\theta _{kj}$と${\bf {r}}_{kj}$の関係の模式図}
+  \label{moshikizu}
+\end{figure}
+\section{走行実験}
+\subsection{実験条件}
+半径 2 mの円形フィールド内で実験を行った．
+使用する走行ロボットの身体性については先行研究\cite{kawano}と同一である．
+円形フィールドの円周上は壁になっており，走行ロボットが壁と衝突した際に約 90°方向転換する仕組みである．
+走行ロボットの初期位置として円形フィールド内にランダムに 4台配置し，初速度 0 m/s で一斉に動作させ 3分間走行する．
+各パラメータは$\alpha = 0.075$，$b = 0.15$，$c = 1.0$で固定する．
+$c = 1.0$の場合には$f(r_{kj})$が常に正であるので，ロボット間の相互作用は引力をもたらす．
+走行ロボットは最大 2 mまでの他の走行ロボットと相互作用し，他の走行ロボットを認識しない場合は進行方向無限遠方に物体が見えているものとみなす．
+感応度($a$)と最適速度関数の変化率($\beta$)の 2つのパラメータを変化させた場合の集団ひも状走行の安定性を分析する．
+ひも状走行とは，先頭の走行ロボットが直線的に走行し他の走行ロボットがその後を追従する走行状態である．
+ひも状走行の安定性を評価する指針として，以下の$q_s\left(t\right)$を定義する．
+\begin{eqnarray}
+q_s\left(t\right) = \prod_{j=1}^{N}\cos\left(\varphi_{j}\left(t\right) \right)
+\label{qs}
+\end{eqnarray}
+$q_s \left(t\right)$は $ 0 \leq q_s \left(t\right) \leq 1$が値域である．
+(\ref{qs})式中の$N$はロボットの台数である．
+$j$番目のロボットの$\varphi\left(t\right)$は以下の(\ref{phi})式で定義する．
+\begin{equation}
+  \varphi_{j}\left(t\right) = \left \{
+  \begin{array}{l}
+    \theta_{kj}\left(t\right) \\
+    \frac{\pi}{2}\quad(他の機体を未認識) \\
+    0 \quad\ (先頭のロボット)
+   \end{array}
+   \right.   
+\label{phi}
+\end{equation}
+$\theta_{kj}\left(t\right)$は図\ref{moshikizu}で定義される．
+$\varphi_j\left(t\right)$は 1台のロボットのみ 0となることを許す．
+$q_s\left( t \right)$が 1に近いほど直線的なひも状であり，0に近いほど曲がったひも状であることを意味する．
+$q_s\left( t \right)$が 0の場合はひもが形成されていないということである．
+各パラメータごとの$q_s\left(t\right)$について 60秒〜180秒の間の時間平均を $\langle q_s \rangle$とする．
+\subsection{実験結果}
+先行研究\cite{wakatsuki}での実験が各パラメータごとに 1回の走行であったのに対して，本研究では各パラメータで 3回走行を行った．
+先行研究\cite{wakatsuki}の実験データを用いて等高線プロットしたものが，図\ref{wakatsuki_line}である．
+本研究の実験データを用いて等高線プロットしたものが，図\ref{yamada_line}である．
+これらの図は$\langle q_s \rangle$を$a$と$\beta$の 2次元平面上の図である．
+これらの図から，集団ひも状走行が安定する条件の概略がわかる．
+$\langle q_s \rangle$を$a$と$\beta$の 2次元平面上に点でプロットしたものが図\ref{qs_point}である．
+図\ref{qs_point}はパラメータごとに 3回の走行を行った全ての結果をグラフ化したものである．
+この図から，より詳細なひも状走行の条件をみることができる．
+図\ref{wakatsuki_line}〜図\ref{qs_point} の $\beta$については，$\log$スケールである．
+図\ref{wakatsuki_line}のデータは，各パラメータごとに 1回の走行の$\langle q_s \rangle$をプロットしている．
+図\ref{yamada_line}，図\ref{qs_point}のデータは，各パラメータ 3回の走行の$\langle q_s \rangle$の平均をプロットしている．
+$\beta=0.0625$の$\langle q_s \rangle$では$a=3$を中心にaが増加する方向に$\langle q_s \rangle$の値に鞍部が発生している．
+$a=0.8,1.0$，$\beta=0.125,0.25,0.5$の$\langle q_s \rangle$に関しては先行研究と同一の結果が出ている．
+全体的な傾向として，パラメータ$2\leq a \leq 5$，$ 0.125 \leq \beta \leq 2.0$では安定したひも状が形成されている．
+先行研究ではひも状走行が安定したパラメータは赤色に対し，本研究の結果は橙色に変化した．
+先行研究の安定したパラメータ内部に一部のみ黄色く描画されている部分は本研究結果でも，色が黄色く描画されている($\beta=0.25$の点)．
+\vspace{2mm}
+\begin{figure}[t]
+  \begin{center}
+    \vspace{-4mm}
+    \includegraphics[width=1.0\linewidth]{wakatsuki1.png}
+    \caption{先行研究\cite{wakatsuki}での$a$-$\beta$空間での$\langle q_s \rangle$についての等高線プロット図}
+    \label{wakatsuki_line}
+  \end{center}
+\end{figure}
+\begin{figure}[t]
+  \begin{center}
+    \vspace{-4mm}
+    \includegraphics[width=1.0\linewidth]{yamada1.png}
+    \caption{本研究での$a$-$\beta$空間での$\langle q_s \rangle$についての等高線プロット図}
+    \label{yamada_line}
+  \end{center}
+\end{figure}
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{20190628_qs.png}
+    \caption{本研究での$a$-$\beta$空間での$\langle q_s \rangle$についての点プロット図}
+    \label{qs_point}
+  \end{center}
+\end{figure}
+\vspace{-1mm}
+\subsection{考察}
+図\ref{yamada_line}で特異な形状の部分をいくつか以下で取り上げる．
+$a=2$および $ 4 $ ，$\beta=0.0625$のパラメータでは先頭 1台のみ離れて走行し，他 3台は集団で追従している．その後ひもが途切れる．
+これは最適速度関数の変化率($\beta$)が小さいために起こっている現象だと考える．
+
+$a=2$ ，$\beta=4.0$のパラメータでは，4台でひもを形成する前に 1台と 3台という集団で走行した後に 4台のひもを形成する動きが見られた．1台づつ走行しているわけではないので，$\langle q_s \rangle$が 1に近い値になったのではないかと考える．
+
+これが$a=5$ ，$\beta=8.0$のパラメータに変更すると，感応度($a$)が大きすぎることから追従するロボットが左右に振動するため，$\langle q_s \rangle$の値が小さくなってしまう．
+先頭ロボットを集団で追従する状態に陥った場合にひもが途切れる原因は，先頭 1台が壁と接触し方向転換した際に2台目を認識して正面衝突を起こし，ひもが途切れるからだと思われる．
+
+基本的な性質として，感応度($a$)の値を 4より大きくした場合では，他のロボットを認識しているが，追従するロボットが左右に振動する動きを示した．
+
+また，最適速度関数の変化率($\beta$)の値が小さい場合，先頭と追従する他のロボットの間の車間距離が長くなり，1台と 3台のまとまりで先頭の 1台を追従する動きを示した．
+半径 2mのフィールドで実験を行っているため，ロボット間の車間距離が長ければ壁に衝突した際に，ひもが切れる動きを示す.
+これは，最適速度関数の変化率($\beta$)が小さいため，先頭のロボットとの車間距離が徐々に短くなるためだと考える．
+
+最適速度関数の変化率($\beta$)の値が大きい場合は，先頭を追従する他のロボットの間の車間距離が短くなる．
+そして車頭距離はほぼbの値となる．
+先頭のロボットが壁に衝突した際，後続のロボットが先頭のロボットを追い切れず，2台目のロボットも壁に衝突するという動きを示した.
+
+つまり，$\beta$が間接的に先頭ロボットと 2台目以降のロボットとの車間距離に強い影響を与える．
+\section{まとめ}
+\vspace{2mm}
+本実験では多様なひも状走行の状態を調べた．
+ロボットのひも状走行を形成する要因を探るため，パラメータについて詳しく調べたが，初期位置や実験時間の大小によってひも状走行の安定性が変化する可能性もある．
+初期位置を実験時間を長くした場合の$\langle q_s \rangle$の変化を分析することで明らかにできるのではないかと考えている．
+先頭ロボットが方向転換した際にひもが途切れる場合については，半径 2 mのフィールド内で発生していることは確認できたが，実験フィールドの形や面積に影響するものなのかを実験フィールドを変化させ，今後比較したい．
+\vspace{2mm}
+\begin{thebibliography}{99}
+\vspace{2mm}
+\bibitem{zyutai_1} M.Bando，K.Hasebe，A.Nakayama，A.Shibata，Y.Sugiyama，PHYSICAL RE-VIEW E 51，1035-1042，(1995)
+\bibitem{2014} 石渡龍輔，衣川亮太，杉山雄規，迷路内での 2次元OV粒子の集団運動の Kantorovic metricを用いた解析，第 20回交通流のシュミレーションシンポジウム論文集，P59-62，(2014)
+\bibitem{2016} 石渡龍輔，衣川亮太，杉山雄規，Kantorovic metricを用いた 2次元OV粒子の集団流の感応度依存性の解析，第 22回交通流と自己駆動粒子系シンポジウム論文集，P41-44，(2016)
+\bibitem{kawano} 川野多佳也，宮島高志，本田泰，二次元最適速度ロボットの開発と集団走行実験，第 23回交通流と自己駆動粒子系のシンポジウム論文集，p63-66，(2017)
+\bibitem{wakatsuki} 若月ある，川野多佳也，宮島高志，本田泰，二次元走行ロボットによる集団ひも状走行の安定性，第 24回交通流と自己駆動粒子系のシンポジウム論文集，p33-36，(2018)
+\end{thebibliography}
+\end{document}
+
+
