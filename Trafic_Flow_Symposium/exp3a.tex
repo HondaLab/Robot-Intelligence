@@ -1,0 +1,32 @@
+直線と円形両方あり，一回じゃなくて，ぐるぐる回って複数の対面走行できるように，楕円コースで実験する．コースの中(青い部分)にロボットをランダムに配置して速度0からほぼ同時にスタート，約8分間実験する．ロボットたちがtof距離センサーでコースの壁までの距離を測って，非線形感覚運動写像モデルにより走行する．半分のロボットが右回り($b_{\rm L}>b_{\rm R}$)，残りのロボットが左回り($b_{\rm L}<b_{\rm R}$)．コースの青い部分の中央に(黒い線)でコースの長さを測る，コースの長さ($L$)は7.32$m$，今回ロボットの台数($N$)は8台．コースの長さを固定し(線密度($\rho$)を固定する(式5))，両側の壁を広まったり，縮まったりして，コースの幅($w$)が$43cm$，$49.5cm$，$56cm$，$62.5cm$，$69cm$を変化し，実験する．
+
+\begin{equation}
+\rho = \frac{N}{L}
+\end{equation}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Oval_h2.eps}
+    \caption{コースレイアウト}
+\end{figure}
+
+
+\begin{figure}[h]
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{course3.jpg}
+        \caption{コース}
+    \end{minipage}
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{number2.jpg}
+        \caption{時間よりロボットの位置角度}
+    \end{minipage}
+\end{figure}
+
+\begin{equation}
+Q = \frac{n}{wT_{\rm sd}}
+\end{equation}
+
+図5の赤い線をベースとして，ロボットが左から右へ線を通過したら流量＋1，右から左へ線を通過したら流量-1．図6の横軸が時間(0から8分間)，縦軸がロボットの位置角度$\theta$(図5),ロボットが赤い線から反時計回りで黒い線まで，$\theta$が0から$\pi$に変わる．赤い線から時計回りで黒い線まで，$\theta$が0から$-\pi$に変わる．横軸の時間に従って，紫色の線が縦軸の0を交差すると，計測線(赤い線)を通過したと認めて，台数($n$)を計測する．一回の実験で図6のように図が８個あり，Aの紫色線に対応する時間が一番大きな時間がone direction flow状態(全てのロボットが同じ向きで走る$b_{\rm L}<b_{\rm R}$)になる時間($T_{\rm sd}$,単位:分)と認める．$ｗ$がコースの幅(単位:$m$)，$Q$が流量，式6で流量を計算する．
+
