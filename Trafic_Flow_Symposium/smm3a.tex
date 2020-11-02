@@ -1,0 +1,36 @@
+感覚運動写像とは，センサー値を変数とする関数によってモーターの出力を決定することであり，その瞬間のセンサー値だけを使うと，最も単純な反応行動のための知能の一つである．
+本研究では，非線形写像モデルが使われている.
+
+1.距離デーダーの相乗平均：
+
+\begin{equation}
+  x_{\rm L} = e^{\gamma \ln d_{\rm C}} \cdot e^{(1-\gamma)\ln d_{\rm L}} 
+\end{equation}
+\begin{equation}
+  x_{\rm R} = e^{\gamma \ln d_{\rm C}} \cdot e^{(1-\gamma)\ln d_{\rm R}} 
+\end{equation}
+
+中央のセンサーでもらった距離デーダー($d_{\rm C}$)と左のセンサーでもらった距離デーダー($d_{\rm L}$)が式(１)で計算して，左の感覚運動写像方程式の入力($x_{\rm L}$)がもらえる，同じように，真中のセンサーでもらった距離デーダー($d_{\rm R}$)と右のセンサーでもらった距離デーダー($d_{\rm R}$)が式(２)で計算して，右の感覚運動写像の入力($x_{\rm R}$)がもらえる．$\gamma$は重みであり，$\gamma$イコール0.33のとき，等加重である．
+
+2.感覚運動写像：
+\begin{equation}
+\begin{aligned}
+  m_{\rm R} = &\alpha_{1{\rm L}} \tanh(\beta_{1{\rm L}}(x_{\rm L} - b_{\rm L})) + \\
+        &\alpha_{2{\rm L}} \tanh(\beta_{2{\rm L}}(x_{\rm L} - b_{\rm L})) + c_{\rm L}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+  m_{\rm L} = &\alpha_{1{\rm R}} \tanh(\beta_{1{\rm R}}(x_{\rm R} - b_{\rm R})) + \\
+        &\alpha_{2{\rm R}}\tanh(\beta_{2{\rm R}}(x_{\rm R} - b_{\rm R})) + c_{\rm R}
+\end{aligned}
+\end{equation}
+式(1)と(2)でもらった$x_{\rm L}$と$x_{\rm R}$を式(3)と(4)に代入して，ロボットの右モーターの出力($m_{\rm R}$)と左モーターの出力($m_{\rm L}$)が計算できる．係数$\alpha$がロボットの最大速度を制御する，係数$\beta$が{\rm tanh}の傾きを制御する，係数$b$が関数の変曲点の位置を制御する，係数$c$が関数のだて軸上の位置を制御する. 
+今回の実験のパラメーター：
+$\alpha_{1{\rm L}}$，$\alpha_{2{\rm L}}$，$\alpha_{1{\rm R}}$，$\alpha_{2{\rm R}}$：30；
+$\beta_{1{\rm L}}$と$\beta_{1{\rm R}}$：0.004；
+$\beta_{2{\rm L}}$と$\beta_{2{\rm R}}$：10；
+$c_{\rm L}$と$c_{\rm R}$：0；
+ロボットグループ1の$b_{\rm L}$とロボットグループ2の$b_{\rm R}$：160；
+ロボットグループ2の$b_{\rm L}$とロボットグループ1の$b_{\rm R}$：260；
