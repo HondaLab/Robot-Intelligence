@@ -123,14 +123,15 @@ class PI_CAMERA_CLASS():
          dis = float(dis/100)
          #print("\r %6.4f %6.4f" % (angle, dis ), end="" )
          self.rawCapture.truncate(0) # clear the stream for next frame
-         cv2.imshow('frame',frame)
-         return dis,rad
       else: #red cup not capture
-         cv2.imshow('frame',frame)
          self.rawCapture.truncate(0) # clear the stream for next frame
-         return None, None
+         dis=None
+         rad=None
 
+      return frame,dis,rad
+      
 if __name__ == "__main__":
     picam = PI_CAMERA_CLASS()    
     while 1:
-        print(picam.calc_dist_theta())
+        frame,dis,rad=picam.calc_dist_theta()
+        cv2.imshow('frame',frame)
