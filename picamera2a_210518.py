@@ -73,8 +73,8 @@ class PI_CAMERA_CLASS():
       self.S = 138
       self.V = 144
       self.h_range = 10
-      self.s_range = 100
-      self.v_range = 80 # 明度の許容範囲
+      self.s_range = 80
+      self.v_range = 60 # 明度の許容範囲
       self.lower_light = np.array([self.H-self.h_range, self.S-self.s_range, self.V-self.v_range])
       self.upper_light = np.array([self.H+self.h_range, self.S+self.s_range, self.V+self.v_range])
 
