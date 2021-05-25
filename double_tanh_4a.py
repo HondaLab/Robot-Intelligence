@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# CC BY-SA Yasushi Honda 2020 5/16
+# MIT License (c) 2020 Yasushi Honda 5/16
 
 import modules.motor as mt # モーターを回転させるためのモジュール
 import modules.vl53_3a as lidar
