@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# CC-BY-SA 2018 2/10 Y.Honda
+# 2018 2/10 Y.Honda
 # mpu9150.py
 
 
