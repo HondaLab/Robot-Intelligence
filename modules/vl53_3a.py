@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-# vl53_3a.py  Yasushi Honda 2020 5.18
+# vl53_3a.py 2020 5.18
 # This modeule code is to access double vl53l0x connected GPIO of RasPi
 
 # MIT License
 # 
-# Copyright (c) 2017 John Bryan Moore
+# Copyright (c) 2020 Yasushi Honda
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
